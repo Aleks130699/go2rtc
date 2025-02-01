@@ -164,9 +164,9 @@ func GetProfileResponse(name string) []byte {
 
 func appendProfile(e *Envelope, tag, name string) {
 	// empty `RateControl` important for UniFi Protect
-	e.Append(`<trt:`, tag, ` token="000" fixed="true">
+	e.Append(`<trt:`, tag, ` token="`, name, `" fixed="true">
 	<tt:Name>Profille_000</tt:Name>
-	<tt:VideoSourceConfiguration token="000">
+	<tt:VideoSourceConfiguration token="`, name, `">
 		<tt:Name>VSC</tt:Name>
 		<tt:SourceToken>`, name, `</tt:SourceToken>
 		<tt:Bounds x="0" y="0" width="1920" height="1080"></tt:Bounds>
@@ -183,9 +183,9 @@ func appendProfile(e *Envelope, tag, name string) {
 
 func appendProfile2(e *Envelope, tag, name string) {
 	// empty `RateControl` important for UniFi Protect
-	e.Append(`<trt:`, tag, ` token="001" fixed="true">
+	e.Append(`<trt:`, tag, ` token="`, name, `" fixed="true">
 	<tt:Name>Profille_001</tt:Name>
-	<tt:VideoSourceConfiguration token="001">
+	<tt:VideoSourceConfiguration token="`, name, `">
 		<tt:Name>VSC</tt:Name>
 		<tt:SourceToken>`, name, `</tt:SourceToken>
 		<tt:Bounds x="0" y="0" width="1920" height="1080"></tt:Bounds>
