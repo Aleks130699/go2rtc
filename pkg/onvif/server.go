@@ -145,7 +145,8 @@ func GetProfilesResponse(names []string) []byte {
 	e.Append(`<trt:GetProfilesResponse>
 `)
 	for _, name := range names {
-		appendProfile(e, "Profiles", name + "Profile_000")
+		appendProfile(e, "Profiles", name)
+		appendProfile2(e, "Profiles", name)
 	}
 	e.Append(`</trt:GetProfilesResponse>`)
 	return e.Bytes()
@@ -155,12 +156,32 @@ func GetProfileResponse(name string) []byte {
 	e := NewEnvelope()
 	e.Append(`<trt:GetProfileResponse>
 `)
-	appendProfile(e, "Profile", name + "Profile_000")
+	appendProfile(e, "Profile", name)
+	appendProfile2(e, "Profile", name)
 	e.Append(`</trt:GetProfileResponse>`)
 	return e.Bytes()
 }
 
 func appendProfile(e *Envelope, tag, name string) {
+	// empty `RateControl` important for UniFi Protect
+	e.Append(`<trt:`, tag, ` token="`, name, `" fixed="true">
+	<tt:Name>`, name, `</tt:Name>
+	<tt:VideoSourceConfiguration token="`, name, `">
+		<tt:Name>VSC</tt:Name>
+		<tt:SourceToken>`, name, `</tt:SourceToken>
+		<tt:Bounds x="0" y="0" width="1920" height="1080"></tt:Bounds>
+	</tt:VideoSourceConfiguration>
+	<tt:VideoEncoderConfiguration token="vec">
+		<tt:Name>VEC</tt:Name>
+		<tt:Encoding>H264</tt:Encoding>
+		<tt:Resolution><tt:Width>1920</tt:Width><tt:Height>1080</tt:Height></tt:Resolution>
+		<tt:RateControl />
+	</tt:VideoEncoderConfiguration>
+</trt:`, tag, `>
+`)
+}
+
+func appendProfile2(e *Envelope, tag, name string) {
 	// empty `RateControl` important for UniFi Protect
 	e.Append(`<trt:`, tag, ` token="`, name, `" fixed="true">
 	<tt:Name>`, name, `</tt:Name>
