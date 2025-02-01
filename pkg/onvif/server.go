@@ -181,7 +181,7 @@ func appendProfile(e *Envelope, tag, name string) {
 `)
 }
 
-func appendProfile(e *Envelope, tag, name string) {
+func appendProfile2(e *Envelope, tag, name string) {
 	// empty `RateControl` important for UniFi Protect
 	e.Append(`<trt:`, tag, ` token="001" fixed="true">
 	<tt:Name>Profille_001</tt:Name>
