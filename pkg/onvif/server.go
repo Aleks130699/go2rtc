@@ -145,8 +145,7 @@ func GetProfilesResponse(names []string) []byte {
 	e.Append(`<trt:GetProfilesResponse>
 `)
 	for _, name := range names {
-		name1 := name + "Profile_000"
-		appendProfile(e, "Profiles", name1)
+		appendProfile(e, "Profiles", name"Profile_000")
 	}
 	e.Append(`</trt:GetProfilesResponse>`)
 	return e.Bytes()
@@ -156,8 +155,7 @@ func GetProfileResponse(name string) []byte {
 	e := NewEnvelope()
 	e.Append(`<trt:GetProfileResponse>
 `)
-	name1 := name + "Profile_000"
-	appendProfile(e, "Profile", name1)
+	appendProfile(e, "Profile", name"Profile_000")
 	e.Append(`</trt:GetProfileResponse>`)
 	return e.Bytes()
 }
